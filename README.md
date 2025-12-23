@@ -146,8 +146,18 @@ client = NexusClient(
     read_timeout=60.0,                   # seconds, default 60.0
     max_retries=3,                       # default 3 for GET requests
     max_connections=200,                 # default 200
+    # Optional: custom logger instance
+    # logger=my_logger,
 )
 ```
+
+In addition, the SDK uses the standard Python `logging` library:
+
+- By default it logs HTTP requests/responses and errors to the logger named `sunbay_nexus_sdk.http`.
+- The SDK **does not** configure handlers or logging levels itself — you are free to integrate with any logging stack
+  (standard logging, loguru, structlog, etc.) by configuring or adapting a `logging.Logger`.
+- For advanced use cases, you can pass a custom logger via the `NexusClient(logger=...)` constructor parameter; this
+  logger will be used by the underlying HTTP client for all log output.
 
 ### Using enums
 

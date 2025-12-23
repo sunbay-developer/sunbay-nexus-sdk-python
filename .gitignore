@@ -8,6 +8,10 @@ __pycache__/
 venv/
 env/
 
+# IDE configs
+.idea/
+.vscode/
+
 # Test artifacts
 .pytest_cache/
 .coverage
@@ -15,5 +19,9 @@ htmlcov/
 
 # Local test directory (do not commit integration tests)
 /tests/
+
+# Local design / docs not meant for distribution
+DESIGN.md
+
 
 

@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import json
 import logging
+import platform
+import sys
 import time
 from dataclasses import asdict, is_dataclass
 from typing import Any, Dict, Optional, Type, TypeVar
@@ -17,7 +19,7 @@ import requests
 from requests import Response, Session
 from requests.exceptions import RequestException, Timeout
 
-from .. import constant
+from .. import __version__, constant
 from ..exception import SunbayBusinessError, SunbayNetworkError
 from ..model.base import BaseResponse
 from ..util.id_generator import generate_request_id
@@ -208,10 +210,18 @@ class HttpClient:
         return result
 
     def _build_headers(self, *, is_post: bool) -> Dict[str, str]:
+        # Build User-Agent following mainstream SDK practice (e.g., AWS Boto3, Stripe)
+        # Format: SDKName/Version Python/PythonVersion OS/OSVersion
+        python_version = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+        os_name = platform.system()
+        os_version = platform.release()
+        user_agent = f"SunbayNexusSDK-Python/{__version__} Python/{python_version} {os_name}/{os_version}"
+
         headers: Dict[str, str] = {
             constant.HEADER_AUTHORIZATION: f"{constant.AUTHORIZATION_BEARER_PREFIX}{self._api_key}",
             constant.HEADER_REQUEST_ID: generate_request_id(),
             constant.HEADER_TIMESTAMP: str(int(time.time() * 1000)),
+            constant.HEADER_USER_AGENT: user_agent,
         }
         if is_post:
             headers[constant.HEADER_CONTENT_TYPE] = constant.CONTENT_TYPE_JSON

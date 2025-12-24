@@ -29,6 +29,7 @@ HEADER_AUTHORIZATION: str = "Authorization"
 HEADER_REQUEST_ID: str = "X-Client-Request-Id"
 HEADER_TIMESTAMP: str = "X-Timestamp"
 HEADER_CONTENT_TYPE: str = "Content-Type"
+HEADER_USER_AGENT: str = "User-Agent"
 
 AUTHORIZATION_BEARER_PREFIX: str = "Bearer "
 CONTENT_TYPE_JSON: str = "application/json"

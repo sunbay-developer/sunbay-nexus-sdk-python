@@ -101,7 +101,7 @@ else:
 
 ### API Overview
 
-The Python SDK exposes a `NexusClient` with methods that correspond to the Java SDK:
+The SDK provides a `NexusClient` with comprehensive payment APIs:
 
 - Transaction APIs:
   - `sale(request: SaleRequest) -> SaleResponse`

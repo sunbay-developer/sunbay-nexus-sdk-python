@@ -3,7 +3,7 @@
 Official Python SDK for the Sunbay Nexus payment platform.
 
 This SDK provides a simple and professional way to integrate with Sunbay Nexus
-from Python applications, following the same semantics as the official Java SDK.
+payment platform from Python applications, with full support for all payment operations.
 
 ### Features
 

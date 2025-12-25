@@ -19,10 +19,10 @@ import requests
 from requests import Response, Session
 from requests.exceptions import RequestException, Timeout
 
-from .. import __version__, constant
-from ..exception import SunbayBusinessError, SunbayNetworkError
-from ..model.base import BaseResponse
-from ..util.id_generator import generate_request_id
+from .. import __version__, constants
+from ..exceptions import SunbayBusinessError, SunbayNetworkError
+from ..models.base import BaseResponse
+from ..utils.id_generator import generate_request_id
 
 T = TypeVar("T", bound=BaseResponse)
 
@@ -57,9 +57,6 @@ class HttpClient:
         adapter = requests.adapters.HTTPAdapter(pool_maxsize=max_connections)
         self._session.mount("http://", adapter)
         self._session.mount("https://", adapter)
-
-    def close(self) -> None:
-        self._session.close()
 
     def post(self, path: str, request_body: Any, response_type: Type[T]) -> T:
         url = f"{self._base_url}{path}"
@@ -218,13 +215,13 @@ class HttpClient:
         user_agent = f"SunbayNexusSDK-Python/{__version__} Python/{python_version} {os_name}/{os_version}"
 
         headers: Dict[str, str] = {
-            constant.HEADER_AUTHORIZATION: f"{constant.AUTHORIZATION_BEARER_PREFIX}{self._api_key}",
-            constant.HEADER_REQUEST_ID: generate_request_id(),
-            constant.HEADER_TIMESTAMP: str(int(time.time() * 1000)),
-            constant.HEADER_USER_AGENT: user_agent,
+            constants.HEADER_AUTHORIZATION: f"{constants.AUTHORIZATION_BEARER_PREFIX}{self._api_key}",
+            constants.HEADER_REQUEST_ID: generate_request_id(),
+            constants.HEADER_TIMESTAMP: str(int(time.time() * 1000)),
+            constants.HEADER_USER_AGENT: user_agent,
         }
         if is_post:
-            headers[constant.HEADER_CONTENT_TYPE] = constant.CONTENT_TYPE_JSON
+            headers[constants.HEADER_CONTENT_TYPE] = constants.CONTENT_TYPE_JSON
         return headers
 
     @staticmethod
@@ -276,7 +273,7 @@ class HttpClient:
         if self._logger.isEnabledFor(logging.INFO):
             self._logger.info("Response %s %s - Status: %s, Body: %s", method, url, status, text)
 
-        if constant.HTTP_STATUS_OK_START <= status < constant.HTTP_STATUS_OK_END:
+        if constants.HTTP_STATUS_OK_START <= status < constants.HTTP_STATUS_OK_END:
             obj = self._parse_response_body(text, response_type)
             if not obj.is_success():
                 self._logger.error(
@@ -291,9 +288,9 @@ class HttpClient:
             return obj
 
         message_parts = [f"HTTP {status}"]
-        if constant.HTTP_STATUS_CLIENT_ERROR_START <= status < constant.HTTP_STATUS_CLIENT_ERROR_END:
+        if constants.HTTP_STATUS_CLIENT_ERROR_START <= status < constants.HTTP_STATUS_CLIENT_ERROR_END:
             message_parts.append("(Client Error)")
-        elif status >= constant.HTTP_STATUS_SERVER_ERROR_START:
+        elif status >= constants.HTTP_STATUS_SERVER_ERROR_START:
             message_parts.append("(Server Error)")
         if text:
             message_parts.append(f"- {text}")

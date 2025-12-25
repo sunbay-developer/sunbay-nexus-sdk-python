@@ -48,8 +48,8 @@ Create it once and reuse it in your application.
 
 ```python
 from sunbay_nexus_sdk import NexusClient, SunbayBusinessError, SunbayNetworkError
-from sunbay_nexus_sdk.model.common import SaleAmount
-from sunbay_nexus_sdk.model.request import SaleRequest
+from sunbay_nexus_sdk.models.common import SaleAmount
+from sunbay_nexus_sdk.models.request import SaleRequest
 
 client = NexusClient(api_key="sk_test_xxx")
 
@@ -66,11 +66,9 @@ request = SaleRequest(
 )
 
 try:
+    # If we reach here, code == "0" (success), no need to check is_success()
     response = client.sale(request)
-    if response.is_success():
-        print("Transaction ID:", response.transaction_id)
-    else:
-        print("Error:", response.code, response.msg)
+    print("Transaction ID:", response.transaction_id)
 except SunbayNetworkError as e:
     print("Network Error:", e)
 except SunbayBusinessError as e:
@@ -81,7 +79,7 @@ except SunbayBusinessError as e:
 
 ```python
 from sunbay_nexus_sdk import NexusClient
-from sunbay_nexus_sdk.model.request import QueryRequest
+from sunbay_nexus_sdk.models.request import QueryRequest
 
 client = NexusClient(api_key="sk_test_xxx")
 
@@ -91,12 +89,14 @@ request = QueryRequest(
     transaction_id="TXN20231119001",
 )
 
-response = client.query(request)
-
-if response.is_success():
+try:
+    # If we reach here, code == "0" (success), no need to check is_success()
+    response = client.query(request)
     print("Status:", response.transaction_status)
-else:
-    print("Error:", response.code, response.msg)
+except SunbayBusinessError as e:
+    print("API Error:", e.code, "-", e)
+except SunbayNetworkError as e:
+    print("Network Error:", e)
 ```
 
 ### API Overview
@@ -167,7 +167,9 @@ provides enums to make the code more self-documenting:
 ```python
 from sunbay_nexus_sdk import TransactionStatus
 
-if response.is_success() and response.transaction_status == TransactionStatus.SUCCESS:
+# In try-catch block, if we reach here, code == "0" (success)
+# So we only need to check transaction_status
+if response.transaction_status == TransactionStatus.SUCCESS:
     print("Transaction succeeded")
 ```
 

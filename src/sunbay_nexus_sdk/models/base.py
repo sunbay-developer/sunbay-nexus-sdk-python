@@ -5,7 +5,7 @@ Base models for Sunbay Nexus SDK.
 from dataclasses import dataclass
 from typing import Optional
 
-from ..constant import RESPONSE_SUCCESS_CODE
+from ..constants import RESPONSE_SUCCESS_CODE
 
 
 @dataclass

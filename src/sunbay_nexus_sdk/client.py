@@ -9,7 +9,7 @@ import logging
 import os
 from typing import Optional
 
-from .constant import (
+from .constants import (
     DEFAULT_BASE_URL,
     DEFAULT_CONNECT_TIMEOUT,
     DEFAULT_MAX_CONNECTIONS,
@@ -19,9 +19,9 @@ from .constant import (
     PATH_QUERY,
     PATH_SALE,
 )
-from .exception import SunbayBusinessError
+from .exceptions import SunbayBusinessError
 from .http import HttpClient
-from .model.request import (
+from .models.request import (
     AbortRequest,
     AuthRequest,
     BatchCloseRequest,
@@ -34,7 +34,7 @@ from .model.request import (
     TipAdjustRequest,
     VoidRequest,
 )
-from .model.response import (
+from .models.response import (
     AbortResponse,
     AuthResponse,
     BatchCloseResponse,
@@ -150,10 +150,20 @@ class NexusClient:
 
     # --- Lifecycle ---
 
-    def close(self) -> None:
+    def __enter__(self) -> "NexusClient":
         """
-        Close underlying HTTP resources.
+        Context manager entry. Allows using NexusClient with 'with' statement.
+
+        Note: Python requests Session will automatically close on program exit
+        via garbage collection, so explicit cleanup is not necessary.
         """
-        self._http_client.close()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        """
+        Context manager exit. No explicit cleanup needed as Python's garbage
+        collector will handle resource cleanup automatically.
+        """
+        pass
 
 

@@ -103,6 +103,8 @@ class AbortResponse(BaseResponse):
 class TipAdjustResponse(BaseResponse):
     """
     Tip adjust response.
+
+    tip_amount is in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     original_transaction_id: Optional[str] = None

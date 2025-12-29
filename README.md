@@ -46,6 +46,9 @@ Create it once and reuse it in your application.
 
 #### 2. Sale transaction
 
+**Important**: All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
+For example, 100.00 USD should be passed as 10000 (cents).
+
 ```python
 from sunbay_nexus_sdk import NexusClient, SunbayBusinessError, SunbayNetworkError
 from sunbay_nexus_sdk.models.common import SaleAmount
@@ -53,7 +56,8 @@ from sunbay_nexus_sdk.models.request import SaleRequest
 
 client = NexusClient(api_key="sk_test_xxx")
 
-amount = SaleAmount(order_amount=100.0, pricing_currency="USD")
+# 100.00 USD = 10000 cents
+amount = SaleAmount(order_amount=10000, pricing_currency="USD")
 
 request = SaleRequest(
     app_id="app_123456",

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sunbay-nexus-sdk"
-version = "1.0.4"
+version = "1.0.5"
 description = "Official Sunbay Nexus Python SDK"
 readme = "README.md"
 requires-python = ">=3.7"

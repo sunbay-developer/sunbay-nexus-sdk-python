@@ -341,6 +341,8 @@ class HttpClient:
         The HTTP API may encode monetary fields as strings. This helper converts
         known numeric amount fields to float so that they match the Python
         dataclass type hints (e.g. Amount, BatchTotalAmount).
+
+        All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
         """
 
         numeric_keys = (

@@ -185,6 +185,8 @@ class AbortRequest:
 class TipAdjustRequest:
     """
     Tip adjust request.
+
+    tip_amount is in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     app_id: str

@@ -12,6 +12,8 @@ class Amount:
     Generic amount information.
 
     This mirrors the Java Amount class and is mainly used in responses.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     price_currency: Optional[str] = None
@@ -28,6 +30,8 @@ class Amount:
 class SaleAmount:
     """
     Amount information for sale transactions.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     order_amount: float
@@ -38,6 +42,8 @@ class SaleAmount:
 class AuthAmount:
     """
     Amount information for auth/forced auth/incremental auth.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     order_amount: float
@@ -48,6 +54,8 @@ class AuthAmount:
 class PostAuthAmount:
     """
     Amount information for post authorization.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     order_amount: float
@@ -61,6 +69,8 @@ class PostAuthAmount:
 class RefundAmount:
     """
     Amount information for refund.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     order_amount: float
@@ -75,6 +85,8 @@ class RefundAmount:
 class BatchTotalAmount:
     """
     Total amount information for batch close.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     transaction_count: Optional[int] = None

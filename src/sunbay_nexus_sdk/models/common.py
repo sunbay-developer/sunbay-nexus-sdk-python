@@ -17,13 +17,12 @@ class Amount:
     """
 
     price_currency: Optional[str] = None
-    trans_amount: Optional[float] = None
-    order_amount: Optional[float] = None
-    tax_amount: Optional[float] = None
-    surcharge_amount: Optional[float] = None
-    tip_amount: Optional[float] = None
-    cashback_amount: Optional[float] = None
-    pricing_currency: Optional[str] = None
+    trans_amount: Optional[int] = None
+    order_amount: Optional[int] = None
+    tax_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
+    tip_amount: Optional[int] = None
+    cashback_amount: Optional[int] = None
 
 
 @dataclass
@@ -34,8 +33,8 @@ class SaleAmount:
     All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
-    order_amount: float
-    pricing_currency: str
+    order_amount: int
+    price_currency: str
 
 
 @dataclass
@@ -46,8 +45,8 @@ class AuthAmount:
     All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
-    order_amount: float
-    pricing_currency: str
+    order_amount: int
+    price_currency: str
 
 
 @dataclass
@@ -58,11 +57,11 @@ class PostAuthAmount:
     All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
-    order_amount: float
-    pricing_currency: str
-    tip_amount: Optional[float] = None
-    tax_amount: Optional[float] = None
-    surcharge_amount: Optional[float] = None
+    order_amount: int
+    price_currency: str
+    tip_amount: Optional[int] = None
+    tax_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
 
 
 @dataclass
@@ -73,12 +72,12 @@ class RefundAmount:
     All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
-    order_amount: float
-    pricing_currency: str
-    tip_amount: Optional[float] = None
-    tax_amount: Optional[float] = None
-    surcharge_amount: Optional[float] = None
-    cashback_amount: Optional[float] = None
+    order_amount: int
+    price_currency: str
+    tip_amount: Optional[int] = None
+    tax_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
+    cashback_amount: Optional[int] = None
 
 
 @dataclass
@@ -90,12 +89,12 @@ class BatchTotalAmount:
     """
 
     transaction_count: Optional[int] = None
-    order_amount: Optional[float] = None
-    tax_amount: Optional[float] = None
-    surcharge_amount: Optional[float] = None
-    tip_amount: Optional[float] = None
-    cashback_amount: Optional[float] = None
-    pricing_currency: Optional[str] = None
+    order_amount: Optional[int] = None
+    tax_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
+    tip_amount: Optional[int] = None
+    cashback_amount: Optional[int] = None
+    price_currency: Optional[str] = None
 
 
 @dataclass
@@ -111,5 +110,26 @@ class PaymentMethodInfo:
     network_type: Optional[str] = None
     card_last4: Optional[str] = None
     entry_mode: Optional[str] = None
+
+
+@dataclass
+class BatchQueryItem:
+    """
+    Batch query item information.
+
+    Statistics grouped by channel code and price currency.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
+    """
+
+    batch_no: Optional[str] = None
+    start_time: Optional[str] = None
+    channel_code: Optional[str] = None
+    price_currency: Optional[str] = None
+    total_count: Optional[int] = None
+    net_amount: Optional[int] = None
+    tip_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
+    tax_amount: Optional[int] = None
 
 

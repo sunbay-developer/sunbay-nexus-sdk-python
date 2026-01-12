@@ -50,7 +50,8 @@ PATH_ABORT: str = f"{SEMI_INTEGRATION_PREFIX}/transaction/abort"
 PATH_TIP_ADJUST: str = f"{SEMI_INTEGRATION_PREFIX}/transaction/tip-adjust"
 PATH_QUERY: str = f"{COMMON_PREFIX}/transaction/query"
 
-# Semi-integration settlement API paths.
-PATH_BATCH_CLOSE: str = f"{SEMI_INTEGRATION_PREFIX}/settlement/batch-close"
+# Settlement API paths.
+PATH_BATCH_CLOSE: str = f"{COMMON_PREFIX}/settlement/batch-close"
+PATH_BATCH_QUERY: str = f"{COMMON_PREFIX}/settlement/batch-query"
 
 

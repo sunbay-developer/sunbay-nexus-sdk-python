@@ -3,10 +3,10 @@ Response models for Sunbay Nexus SDK.
 """
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 from .base import BaseResponse
-from .common import Amount, BatchTotalAmount
+from .common import Amount, BatchTotalAmount, BatchQueryItem
 
 
 @dataclass
@@ -109,7 +109,7 @@ class TipAdjustResponse(BaseResponse):
 
     original_transaction_id: Optional[str] = None
     original_transaction_request_id: Optional[str] = None
-    tip_amount: Optional[float] = None
+    tip_amount: Optional[int] = None
 
 
 @dataclass
@@ -148,12 +148,29 @@ class QueryResponse(BaseResponse):
 class BatchCloseResponse(BaseResponse):
     """
     Batch close response.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     batch_no: Optional[str] = None
     terminal_sn: Optional[str] = None
-    close_time: Optional[str] = None
+    batch_time: Optional[str] = None
     transaction_count: Optional[int] = None
-    total_amount: Optional[BatchTotalAmount] = None
+    price_currency: Optional[str] = None
+    net_amount: Optional[int] = None
+    tip_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
+    tax_amount: Optional[int] = None
+
+
+@dataclass
+class BatchQueryResponse(BaseResponse):
+    """
+    Batch query response.
+
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
+    """
+
+    batch_list: Optional[List[BatchQueryItem]] = None
 
 

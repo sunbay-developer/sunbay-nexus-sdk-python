@@ -57,7 +57,7 @@ from sunbay_nexus_sdk.models.request import SaleRequest
 client = NexusClient(api_key="sk_test_xxx")
 
 # 100.00 USD = 10000 cents
-amount = SaleAmount(order_amount=10000, pricing_currency="USD")
+amount = SaleAmount(order_amount=10000, price_currency="USD")
 
 request = SaleRequest(
     app_id="app_123456",

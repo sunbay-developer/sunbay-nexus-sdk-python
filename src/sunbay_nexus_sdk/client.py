@@ -16,6 +16,7 @@ from .constants import (
     DEFAULT_MAX_RETRIES,
     DEFAULT_READ_TIMEOUT,
     PATH_BATCH_CLOSE,
+    PATH_BATCH_QUERY,
     PATH_QUERY,
     PATH_SALE,
 )
@@ -25,6 +26,7 @@ from .models.request import (
     AbortRequest,
     AuthRequest,
     BatchCloseRequest,
+    BatchQueryRequest,
     ForcedAuthRequest,
     IncrementalAuthRequest,
     PostAuthRequest,
@@ -38,6 +40,7 @@ from .models.response import (
     AbortResponse,
     AuthResponse,
     BatchCloseResponse,
+    BatchQueryResponse,
     ForcedAuthResponse,
     IncrementalAuthResponse,
     PostAuthResponse,
@@ -143,7 +146,35 @@ class NexusClient:
 
     # --- Settlement APIs ---
 
+    def batch_query(self, request: BatchQueryRequest) -> BatchQueryResponse:
+        """
+        Batch query.
+
+        Query batch information grouped by channel code and price currency.
+
+        Args:
+            request: Batch query request
+
+        Returns:
+            Batch query response
+        """
+        if request is None:
+            raise SunbayBusinessError("BatchQueryRequest cannot be null")
+        return self._http_client.post(PATH_BATCH_QUERY, request, BatchQueryResponse)
+
     def batch_close(self, request: BatchCloseRequest) -> BatchCloseResponse:
+        """
+        Batch close.
+
+        Close the current transaction batch and trigger settlement process. After
+        batch close, all transactions in the batch will enter the settlement process.
+
+        Args:
+            request: Batch close request
+
+        Returns:
+            Batch close response
+        """
         if request is None:
             raise SunbayBusinessError("BatchCloseRequest cannot be null")
         return self._http_client.post(PATH_BATCH_CLOSE, request, BatchCloseResponse)

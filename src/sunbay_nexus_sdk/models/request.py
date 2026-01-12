@@ -146,7 +146,19 @@ class BatchCloseRequest:
     merchant_id: str
     transaction_request_id: str
     terminal_sn: str
+    channel_code: Optional[str] = None
     description: Optional[str] = None
+
+
+@dataclass
+class BatchQueryRequest:
+    """
+    Batch query request.
+    """
+
+    app_id: str
+    merchant_id: str
+    terminal_sn: str
 
 
 @dataclass
@@ -194,7 +206,7 @@ class TipAdjustRequest:
     terminal_sn: str
     original_transaction_id: Optional[str] = None
     original_transaction_request_id: Optional[str] = None
-    tip_amount: float = 0.0
+    tip_amount: int = 0
     attach: Optional[str] = None
 
 

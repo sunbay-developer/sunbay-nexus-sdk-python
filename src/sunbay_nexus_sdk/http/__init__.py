@@ -255,6 +255,16 @@ class HttpClient:
         payload.setdefault("msg", msg)
         payload.setdefault("trace_id", trace_id)
 
+        # Handle batch_list field: convert list of dicts to list of BatchQueryItem objects
+        if "batch_list" in payload and payload["batch_list"] is not None:
+            from .models.common import BatchQueryItem
+            batch_list = payload["batch_list"]
+            if isinstance(batch_list, list):
+                payload["batch_list"] = [
+                    BatchQueryItem(**item) if isinstance(item, dict) else item
+                    for item in batch_list
+                ]
+
         obj = response_type(**payload)  # type: ignore[arg-type]
         if not isinstance(obj, BaseResponse):
             raise SunbayNetworkError("Response type is not a subclass of BaseResponse", retryable=False)
@@ -339,10 +349,11 @@ class HttpClient:
         Normalize numeric fields inside amount-like structures.
 
         The HTTP API may encode monetary fields as strings. This helper converts
-        known numeric amount fields to float so that they match the Python
+        known numeric amount fields to int so that they match the Python
         dataclass type hints (e.g. Amount, BatchTotalAmount).
 
-        All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
+        All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY)
+        and are represented as integers.
         """
 
         numeric_keys = (
@@ -352,6 +363,7 @@ class HttpClient:
             "surcharge_amount",
             "tip_amount",
             "cashback_amount",
+            "net_amount",
         )
 
         def _convert_fields(amount_dict: Dict[str, Any]) -> None:
@@ -359,13 +371,29 @@ class HttpClient:
                 value = amount_dict.get(key)
                 if isinstance(value, str):
                     try:
-                        amount_dict[key] = float(value)
+                        amount_dict[key] = int(value)
                     except ValueError:
-                        # Keep original value if it cannot be parsed as float.
+                        # Keep original value if it cannot be parsed.
                         continue
 
         for field_name in ("amount", "total_amount"):
             obj = payload.get(field_name)
             if isinstance(obj, dict):
                 _convert_fields(obj)
+
+        # Handle batch_list field for BatchQueryResponse
+        batch_list = payload.get("batch_list")
+        if isinstance(batch_list, list):
+            for item in batch_list:
+                if isinstance(item, dict):
+                    _convert_fields(item)
+
+        # Handle batch-related fields in BatchCloseResponse
+        for batch_field in ("net_amount", "tip_amount", "surcharge_amount", "tax_amount"):
+            value = payload.get(batch_field)
+            if isinstance(value, str):
+                try:
+                    payload[batch_field] = int(value)
+                except ValueError:
+                    continue
 

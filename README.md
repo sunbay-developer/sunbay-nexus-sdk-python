@@ -120,6 +120,7 @@ The SDK provides a `NexusClient` with comprehensive payment APIs:
 - Query APIs:
   - `query(request: QueryRequest) -> QueryResponse`
 - Settlement APIs:
+  - `batch_query(request: BatchQueryRequest) -> BatchQueryResponse`
   - `batch_close(request: BatchCloseRequest) -> BatchCloseResponse`
 
 ### Exceptions

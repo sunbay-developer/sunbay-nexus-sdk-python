@@ -257,7 +257,7 @@ class HttpClient:
 
         # Handle batch_list field: convert list of dicts to list of BatchQueryItem objects
         if "batch_list" in payload and payload["batch_list"] is not None:
-            from .models.common import BatchQueryItem
+            from ..models.common import BatchQueryItem
             batch_list = payload["batch_list"]
             if isinstance(batch_list, list):
                 payload["batch_list"] = [

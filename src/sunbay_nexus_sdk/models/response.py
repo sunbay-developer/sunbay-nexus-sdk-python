@@ -62,6 +62,8 @@ class PostAuthResponse(BaseResponse):
     transaction_id: Optional[str] = None
     reference_order_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    original_transaction_id: Optional[str] = None
+    original_transaction_request_id: Optional[str] = None
 
 
 @dataclass

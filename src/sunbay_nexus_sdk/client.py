@@ -15,10 +15,18 @@ from .constants import (
     DEFAULT_MAX_CONNECTIONS,
     DEFAULT_MAX_RETRIES,
     DEFAULT_READ_TIMEOUT,
+    PATH_ABORT,
+    PATH_AUTH,
     PATH_BATCH_CLOSE,
     PATH_BATCH_QUERY,
+    PATH_FORCED_AUTH,
+    PATH_INCREMENTAL_AUTH,
+    PATH_POST_AUTH,
     PATH_QUERY,
+    PATH_REFUND,
     PATH_SALE,
+    PATH_TIP_ADJUST,
+    PATH_VOID,
 )
 from .exceptions import SunbayBusinessError
 from .http import HttpClient

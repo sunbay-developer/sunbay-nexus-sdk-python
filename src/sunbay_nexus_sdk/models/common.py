@@ -29,11 +29,15 @@ class Amount:
 class SaleAmount:
     """
     Amount information for sale transactions.
-
+    Supports: order_amount, tip_amount, tax_amount, surcharge_amount, cashback_amount.
     All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
     """
 
     order_amount: int
+    tip_amount: Optional[int] = None
+    tax_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
+    cashback_amount: Optional[int] = None
     price_currency: str
 
 
@@ -78,23 +82,6 @@ class RefundAmount:
     tax_amount: Optional[int] = None
     surcharge_amount: Optional[int] = None
     cashback_amount: Optional[int] = None
-
-
-@dataclass
-class BatchTotalAmount:
-    """
-    Total amount information for batch close.
-
-    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
-    """
-
-    transaction_count: Optional[int] = None
-    order_amount: Optional[int] = None
-    tax_amount: Optional[int] = None
-    surcharge_amount: Optional[int] = None
-    tip_amount: Optional[int] = None
-    cashback_amount: Optional[int] = None
-    price_currency: Optional[str] = None
 
 
 @dataclass

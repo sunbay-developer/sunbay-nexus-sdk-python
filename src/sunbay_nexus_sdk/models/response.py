@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Optional, List
 
 from .base import BaseResponse
-from .common import Amount, BatchTotalAmount, BatchQueryItem
+from .common import Amount, BatchQueryItem
 
 
 @dataclass

@@ -34,11 +34,11 @@ class SaleAmount:
     """
 
     order_amount: int
+    price_currency: str
     tip_amount: Optional[int] = None
     tax_amount: Optional[int] = None
     surcharge_amount: Optional[int] = None
     cashback_amount: Optional[int] = None
-    price_currency: str
 
 
 @dataclass

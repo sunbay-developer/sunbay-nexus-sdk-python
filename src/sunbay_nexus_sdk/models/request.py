@@ -25,6 +25,8 @@ class SaleRequest:
     attach: Optional[str] = None
     notify_url: Optional[str] = None
     time_expire: Optional[str] = None
+    # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
+    print_receipt: str = "NONE"
 
 
 @dataclass
@@ -44,6 +46,8 @@ class AuthRequest:
     attach: Optional[str] = None
     notify_url: Optional[str] = None
     time_expire: Optional[str] = None
+    # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
+    print_receipt: str = "NONE"
 
 
 @dataclass
@@ -63,6 +67,8 @@ class ForcedAuthRequest:
     attach: Optional[str] = None
     notify_url: Optional[str] = None
     time_expire: Optional[str] = None
+    # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
+    print_receipt: str = "NONE"
 
 
 @dataclass
@@ -81,6 +87,8 @@ class IncrementalAuthRequest:
     terminal_sn: Optional[str] = None
     attach: Optional[str] = None
     notify_url: Optional[str] = None
+    # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
+    print_receipt: str = "NONE"
 
 
 @dataclass
@@ -113,6 +121,8 @@ class PostAuthRequest:
     terminal_sn: Optional[str] = None
     attach: Optional[str] = None
     notify_url: Optional[str] = None
+    # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
+    print_receipt: str = "NONE"
 
 
 @dataclass
@@ -134,6 +144,8 @@ class RefundRequest:
     attach: Optional[str] = None
     notify_url: Optional[str] = None
     time_expire: Optional[str] = None
+    # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
+    print_receipt: str = "NONE"
 
 
 @dataclass
@@ -176,6 +188,8 @@ class VoidRequest:
     terminal_sn: Optional[str] = None
     attach: Optional[str] = None
     notify_url: Optional[str] = None
+    # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
+    print_receipt: str = "NONE"
 
 
 @dataclass

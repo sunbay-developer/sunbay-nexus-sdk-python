@@ -121,3 +121,19 @@ class AuthenticationMethod(str, Enum):
     SIGNATURE = "SIGNATURE"
 
 
+class PrintReceipt(str, Enum):
+    """
+    Receipt print option.
+    Code values match API printReceipt parameter.
+    """
+
+    # Do not print receipt
+    NONE = "NONE"
+    # Merchant copy only
+    MERCHANT = "MERCHANT"
+    # Customer copy only
+    CUSTOMER = "CUSTOMER"
+    # Both merchant and customer copies
+    BOTH = "BOTH"
+
+

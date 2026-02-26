@@ -89,6 +89,8 @@ class IncrementalAuthRequest:
     notify_url: Optional[str] = None
     # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
     print_receipt: str = "NONE"
+    # Whether to push the transaction to the terminal. Default True.
+    push_to_terminal: bool = True
 
 
 @dataclass
@@ -123,6 +125,8 @@ class PostAuthRequest:
     notify_url: Optional[str] = None
     # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
     print_receipt: str = "NONE"
+    # Whether to push the transaction to the terminal. Default True.
+    push_to_terminal: bool = True
 
 
 @dataclass
@@ -146,6 +150,8 @@ class RefundRequest:
     time_expire: Optional[str] = None
     # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
     print_receipt: str = "NONE"
+    # Whether to push the transaction to the terminal. Default True.
+    push_to_terminal: bool = True
 
 
 @dataclass
@@ -190,6 +196,8 @@ class VoidRequest:
     notify_url: Optional[str] = None
     # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
     print_receipt: str = "NONE"
+    # Whether to push the transaction to the terminal. Default True.
+    push_to_terminal: bool = True
 
 
 @dataclass

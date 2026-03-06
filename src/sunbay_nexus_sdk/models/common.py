@@ -92,11 +92,16 @@ class PaymentMethodInfo:
     The exact fields may evolve over time. This class focuses on properties
     that are generally useful to expose to callers. Additional fields can be
     added in a backward compatible way.
+
+    sub_id: Sub payment method. When category=CARD, must not be set. When
+    category=EBT and id=EBT only, may be set to SNAP, VOUCHER, or BENEFIT.
     """
 
     network_type: Optional[str] = None
     card_last4: Optional[str] = None
     entry_mode: Optional[str] = None
+    # Sub payment method: SNAP, VOUCHER, BENEFIT. Only when category=EBT and id=EBT.
+    sub_id: Optional[str] = None
 
 
 @dataclass

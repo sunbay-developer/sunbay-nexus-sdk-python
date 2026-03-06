@@ -27,6 +27,8 @@ class SaleRequest:
     time_expire: Optional[str] = None
     # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
     print_receipt: str = "NONE"
+    # Card network type (CREDIT, DEBIT, EBT, EGC, UNKNOWN). Only when payment_method.category=CARD; else auto-detected.
+    card_network_type: Optional[str] = None
 
 
 @dataclass
@@ -48,6 +50,8 @@ class AuthRequest:
     time_expire: Optional[str] = None
     # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
     print_receipt: str = "NONE"
+    # Card network type (CREDIT, DEBIT, EBT, EGC, UNKNOWN). Only when payment_method.category=CARD; else auto-detected.
+    card_network_type: Optional[str] = None
 
 
 @dataclass
@@ -69,6 +73,8 @@ class ForcedAuthRequest:
     time_expire: Optional[str] = None
     # Receipt print option: NONE, MERCHANT, CUSTOMER, BOTH. Default NONE.
     print_receipt: str = "NONE"
+    # Card network type (CREDIT, DEBIT, EBT, EGC, UNKNOWN). Only when payment_method.category=CARD; else auto-detected.
+    card_network_type: Optional[str] = None
 
 
 @dataclass
@@ -152,6 +158,8 @@ class RefundRequest:
     print_receipt: str = "NONE"
     # Whether to push the transaction to the terminal. Default True.
     push_to_terminal: bool = True
+    # Card network type (CREDIT, DEBIT, EBT, EGC, UNKNOWN). Only when payment_method.category=CARD; else auto-detected.
+    card_network_type: Optional[str] = None
 
 
 @dataclass

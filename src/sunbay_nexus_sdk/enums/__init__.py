@@ -137,3 +137,14 @@ class PrintReceipt(str, Enum):
     BOTH = "BOTH"
 
 
+class EbtSubId(str, Enum):
+    """
+    EBT sub payment method.
+    Only applicable when paymentMethod.category=EBT and paymentMethod.id=EBT.
+    """
+
+    SNAP = "SNAP"
+    VOUCHER = "VOUCHER"
+    BENEFIT = "BENEFIT"
+
+

@@ -11,13 +11,14 @@ except ImportError:
     __version__ = pkg_resources.get_distribution("sunbay-nexus-sdk").version
 except Exception:
     # Fallback if package is not installed (e.g., during development)
-    __version__ = "1.0.12"
+    __version__ = "1.0.13"
 
 from .client import NexusClient
 from .exceptions import SunbayBusinessError, SunbayNetworkError
 from .enums import (
     AuthenticationMethod,
     CardNetworkType,
+    DigitalWalletPaymentMethod,
     EbtSubId,
     EntryMode,
     PaymentCategory,
@@ -33,6 +34,7 @@ __all__ = (
     "TransactionStatus",
     "TransactionType",
     "CardNetworkType",
+    "DigitalWalletPaymentMethod",
     "EbtSubId",
     "EntryMode",
     "PaymentCategory",

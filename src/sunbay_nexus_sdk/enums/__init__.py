@@ -148,3 +148,13 @@ class EbtSubId(str, Enum):
     BENEFIT = "BENEFIT"
 
 
+class DigitalWalletPaymentMethod(str, Enum):
+    """
+    Online direct payment wallet methods for POST /v1/checkout/sale.
+    Code values match API paymentMethod parameter.
+    """
+
+    GOOGLE_PAY = "GOOGLE_PAY"
+    APPLE_PAY = "APPLE_PAY"
+
+

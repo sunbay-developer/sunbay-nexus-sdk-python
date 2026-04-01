@@ -1,5 +1,7 @@
 ## Sunbay Nexus Python SDK
 
+**Package version:** 1.0.13
+
 Official Python SDK for the Sunbay Nexus payment platform.
 
 This SDK provides a simple and professional way to integrate with Sunbay Nexus
@@ -20,6 +22,8 @@ Once published to PyPI:
 
 ```bash
 pip install sunbay-nexus-sdk
+# Or pin this release:
+pip install sunbay-nexus-sdk==1.0.13
 ```
 
 ### Supported Python versions
@@ -122,6 +126,9 @@ The SDK provides a `NexusClient` with comprehensive payment APIs:
 - Settlement APIs:
   - `batch_query(request: BatchQueryRequest) -> BatchQueryResponse`
   - `batch_close(request: BatchCloseRequest) -> BatchCloseResponse`
+- Online checkout APIs ([Hosted Payment Page](https://docs.sunbay.dev/en/refspec/online/checkout/checkout-api-integration), [Direct payment](https://docs.sunbay.dev/en/refspec/online/direct-payment)):
+  - `create_checkout_session(request: CreateCheckoutSessionRequest) -> CreateCheckoutSessionResponse` — `POST /v1/checkout/create-session`
+  - `checkout_sale(request: CheckoutSaleRequest) -> CheckoutSaleResponse` — `POST /v1/checkout/sale`
 
 ### Exceptions
 

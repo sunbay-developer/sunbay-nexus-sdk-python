@@ -105,6 +105,48 @@ class PaymentMethodInfo:
 
 
 @dataclass
+class CheckoutAmount:
+    """
+    Amount for online checkout APIs (create-session and /checkout/sale).
+
+    Payable / charged total = order_amount + tax_amount + surcharge_amount.
+    All amount fields are in the smallest currency unit (e.g., cents for USD, fen for CNY).
+    """
+
+    order_amount: int
+    price_currency: str
+    tax_amount: Optional[int] = None
+    surcharge_amount: Optional[int] = None
+
+
+@dataclass
+class CheckoutProductItem:
+    """
+    Line item for checkout productList.
+
+    If product_list is sent, sum(amount * num) must equal amount.order_amount.
+    """
+
+    amount: int
+    name: str
+    num: int
+
+
+@dataclass
+class CheckoutAddress:
+    """
+    Billing or shipping address for direct online payment (POST /v1/checkout/sale).
+    """
+
+    line_1: Optional[str] = None
+    line_2: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    postal_code: Optional[str] = None
+    country: Optional[str] = None
+
+
+@dataclass
 class BatchQueryItem:
     """
     Batch query item information.

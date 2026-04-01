@@ -176,3 +176,39 @@ class BatchQueryResponse(BaseResponse):
     batch_list: Optional[List[BatchQueryItem]] = None
 
 
+@dataclass
+class CreateCheckoutSessionResponse(BaseResponse):
+    """
+    Response for POST /v1/checkout/create-session.
+
+    The API echoes request fields in data together with sessionId, checkoutUrl, expiresAt.
+    """
+
+    checkout_url: Optional[str] = None
+    expires_at: Optional[str] = None
+    session_id: Optional[str] = None
+    app_id: Optional[str] = None
+    merchant_id: Optional[str] = None
+    transaction_request_id: Optional[str] = None
+    reference_order_id: Optional[str] = None
+    description: Optional[str] = None
+    amount: Optional[Amount] = None
+    product_list: Optional[List[dict]] = None
+    collect_billing_address: Optional[bool] = None
+    collect_shipping_address: Optional[bool] = None
+    merchant_return_url: Optional[str] = None
+    notify_url: Optional[str] = None
+
+
+@dataclass
+class CheckoutSaleResponse(BaseResponse):
+    """
+    Response for POST /v1/checkout/sale (direct online payment).
+    """
+
+    transaction_id: Optional[str] = None
+    reference_order_id: Optional[str] = None
+    transaction_request_id: Optional[str] = None
+    redirect_url: Optional[str] = None
+
+

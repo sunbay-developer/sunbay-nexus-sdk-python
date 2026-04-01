@@ -19,6 +19,8 @@ from .constants import (
     PATH_AUTH,
     PATH_BATCH_CLOSE,
     PATH_BATCH_QUERY,
+    PATH_CHECKOUT_SALE,
+    PATH_CREATE_CHECKOUT_SESSION,
     PATH_FORCED_AUTH,
     PATH_INCREMENTAL_AUTH,
     PATH_POST_AUTH,
@@ -35,6 +37,8 @@ from .models.request import (
     AuthRequest,
     BatchCloseRequest,
     BatchQueryRequest,
+    CheckoutSaleRequest,
+    CreateCheckoutSessionRequest,
     ForcedAuthRequest,
     IncrementalAuthRequest,
     PostAuthRequest,
@@ -49,6 +53,8 @@ from .models.response import (
     AuthResponse,
     BatchCloseResponse,
     BatchQueryResponse,
+    CheckoutSaleResponse,
+    CreateCheckoutSessionResponse,
     ForcedAuthResponse,
     IncrementalAuthResponse,
     PostAuthResponse,
@@ -186,6 +192,32 @@ class NexusClient:
         if request is None:
             raise SunbayBusinessError("BatchCloseRequest cannot be null")
         return self._http_client.post(PATH_BATCH_CLOSE, request, BatchCloseResponse)
+
+    # --- Online checkout APIs ---
+
+    def create_checkout_session(
+        self, request: CreateCheckoutSessionRequest
+    ) -> CreateCheckoutSessionResponse:
+        """
+        Create a Hosted Payment Page checkout session (POST /v1/checkout/create-session).
+
+        Returns checkout URL and expiry; redirect the customer to complete payment.
+        """
+        if request is None:
+            raise SunbayBusinessError("CreateCheckoutSessionRequest cannot be null")
+        return self._http_client.post(
+            PATH_CREATE_CHECKOUT_SESSION, request, CreateCheckoutSessionResponse
+        )
+
+    def checkout_sale(self, request: CheckoutSaleRequest) -> CheckoutSaleResponse:
+        """
+        Direct online payment without a prior HPP session (POST /v1/checkout/sale).
+
+        Used for digital wallets (e.g. Google Pay, Apple Pay) with encrypted wallet payload.
+        """
+        if request is None:
+            raise SunbayBusinessError("CheckoutSaleRequest cannot be null")
+        return self._http_client.post(PATH_CHECKOUT_SALE, request, CheckoutSaleResponse)
 
     # --- Lifecycle ---
 

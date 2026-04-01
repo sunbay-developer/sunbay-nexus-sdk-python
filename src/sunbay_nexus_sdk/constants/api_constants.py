@@ -54,4 +54,8 @@ PATH_QUERY: str = f"{COMMON_PREFIX}/transaction/query"
 PATH_BATCH_CLOSE: str = f"{COMMON_PREFIX}/settlement/batch-close"
 PATH_BATCH_QUERY: str = f"{COMMON_PREFIX}/settlement/batch-query"
 
+# Online checkout (Hosted Payment Page & direct wallet payment).
+PATH_CREATE_CHECKOUT_SESSION: str = f"{COMMON_PREFIX}/checkout/create-session"
+PATH_CHECKOUT_SALE: str = f"{COMMON_PREFIX}/checkout/sale"
+
 

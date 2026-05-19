@@ -18,6 +18,7 @@ class SaleResponse(BaseResponse):
     transaction_id: Optional[str] = None
     reference_order_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    transaction_status: Optional[str] = None
 
 
 @dataclass
@@ -29,6 +30,7 @@ class AuthResponse(BaseResponse):
     transaction_id: Optional[str] = None
     reference_order_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    transaction_status: Optional[str] = None
 
 
 @dataclass
@@ -40,6 +42,7 @@ class ForcedAuthResponse(BaseResponse):
     transaction_id: Optional[str] = None
     reference_order_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    transaction_status: Optional[str] = None
 
 
 @dataclass
@@ -51,6 +54,7 @@ class IncrementalAuthResponse(BaseResponse):
     transaction_id: Optional[str] = None
     reference_order_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    transaction_status: Optional[str] = None
 
 
 @dataclass
@@ -62,6 +66,7 @@ class PostAuthResponse(BaseResponse):
     transaction_id: Optional[str] = None
     reference_order_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    transaction_status: Optional[str] = None
     original_transaction_id: Optional[str] = None
     original_transaction_request_id: Optional[str] = None
 
@@ -75,6 +80,7 @@ class RefundResponse(BaseResponse):
     transaction_id: Optional[str] = None
     reference_order_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    transaction_status: Optional[str] = None
     original_transaction_id: Optional[str] = None
     original_transaction_request_id: Optional[str] = None
 
@@ -87,6 +93,7 @@ class VoidResponse(BaseResponse):
 
     transaction_id: Optional[str] = None
     transaction_request_id: Optional[str] = None
+    transaction_status: Optional[str] = None
     original_transaction_id: Optional[str] = None
     original_transaction_request_id: Optional[str] = None
 
@@ -97,6 +104,7 @@ class AbortResponse(BaseResponse):
     Abort response.
     """
 
+    transaction_status: Optional[str] = None
     original_transaction_id: Optional[str] = None
     original_transaction_request_id: Optional[str] = None
 

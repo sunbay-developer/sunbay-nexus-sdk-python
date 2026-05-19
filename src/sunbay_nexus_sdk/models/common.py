@@ -3,7 +3,7 @@ Common value objects shared across multiple requests and responses.
 """
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import List, Optional
 
 
 @dataclass
@@ -26,6 +26,37 @@ class Amount:
 
 
 @dataclass
+class TipSuggestions:
+    """
+    Tip suggestions configuration.
+
+    fee_mode: RATE or AMOUNT.
+      - RATE: values represent percentage (e.g., [15, 18, 20] means 15%, 18%, 20%).
+      - AMOUNT: values represent fixed amounts in smallest currency unit.
+    """
+
+    fee_mode: str
+    values: List[int]
+
+
+@dataclass
+class TipConfig:
+    """
+    Tip configuration for on-screen tipping.
+
+    on_screen_tip: Whether to show tip screen on terminal.
+    tip_mode: ON_SALE (tip during sale) or AFTER_SALE (tip after sale/adjust).
+    tip_with_tax: Whether tip is calculated with tax included.
+    suggestions: Optional tip suggestions shown to customer.
+    """
+
+    on_screen_tip: bool = True
+    tip_mode: str = "ON_SALE"
+    tip_with_tax: bool = False
+    suggestions: Optional[TipSuggestions] = None
+
+
+@dataclass
 class SaleAmount:
     """
     Amount information for sale transactions.
@@ -39,6 +70,7 @@ class SaleAmount:
     tax_amount: Optional[int] = None
     surcharge_amount: Optional[int] = None
     cashback_amount: Optional[int] = None
+    tip_config: Optional[TipConfig] = None
 
 
 @dataclass
@@ -66,6 +98,7 @@ class PostAuthAmount:
     tip_amount: Optional[int] = None
     tax_amount: Optional[int] = None
     surcharge_amount: Optional[int] = None
+    tip_config: Optional[TipConfig] = None
 
 
 @dataclass
